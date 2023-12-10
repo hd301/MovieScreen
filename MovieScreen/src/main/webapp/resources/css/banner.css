@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+/*--------------------------------------------------------------
+# Testimonials Section
+--------------------------------------------------------------*/
+.bannerimonials {
+  margin-top: 80px;
+}
+
+.bannerimonials .bannerimonial-item {
+  box-sizing: content-box;
+  padding: 30px;
+  margin: 40px 30px;
+  background: var(--color-secondary);
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.bannerimonials .bannerimonial-item .bannerimonial-img {
+  width: 90px;
+  border-radius: 50%;
+  border: 5px solid #474a4d;
+  margin: 0 auto;
+}
+
+.bannerimonials .bannerimonial-item h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0 5px 0;
+  color: #fff;
+}
+
+.bannerimonials .bannerimonial-item h4 {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.bannerimonials .bannerimonial-item p {
+  font-style: italic;
+  margin: 0 auto 15px auto;
+}
+
+.bannerimonials .swiper-pagination {
+  margin-top: 20px;
+  position: relative;
+}
+
+.bannerimonials .swiper-pagination .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.2);
+  opacity: 1;
+}
+
+.bannerimonials .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.bannerimonials .swiper-slide {
+  opacity: 0.3;
+}
+
+@media (max-width: 1199px) {
+  .bannerimonials .swiper-slide-active {
+    opacity: 1;
+  }
+
+  .bannerimonials .swiper-pagination {
+    margin-top: 0;
+  }
+
+  .bannerimonials .testimonial-item {
+    margin: 40px 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .bannerimonials .swiper-slide-next {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}

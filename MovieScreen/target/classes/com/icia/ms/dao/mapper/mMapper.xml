@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace는 변경 가능 -->
+<mapper namespace="Member">
+	<select id="idCheck" parameterType="String" resultType="String">
+		SELECT MID FROM MEMBERT WHERE MID = #{mId}
+	</select>
+	
+	<insert id="mJoin" parameterType="member">
+		INSERT INTO MEMBERT VALUES(#{mId}, #{mPw}, #{mName}, #{mBirth}, #{mGender}, #{mEmail}, #{mPhone}, #{mAddr}, #{mProfileName})
+	</insert>
+	
+	<select id="mLogin" parameterType="String" resultType="String">
+		SELECT MPW FROM MEMBERT WHERE MID = #{mId}
+	</select>
+	
+	<select id="mView" parameterType="String" resultType="member">
+		SELECT * FROM MEMBERT WHERE MID = #{mId}
+	</select>
+	
+	<select id="mCount" resultType="int">
+		SELECT COUNT(*) FROM MEMBERT
+	</select>
+	
+	<select id="mList" parameterType="paging" resultType="member">
+		SELECT * FROM MEMBERLIST WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<update id="mModify" parameterType="member">
+		UPDATE MEMBERT SET MNAME = #{mName}, MPW = #{mPw}, MBIRTH = #{mBirth}, MEMAIL = #{mEmail}, MPHONE = #{mPhone}, MADDR = #{mAddr}, MPROFILENAME = #{mProfileName} WHERE MID = #{mId}
+	</update>
+	
+	<select id="mProfile" parameterType="String" resultType="String">
+		SELECT MPROFILENAME FROM MEMBERT WHERE MID = #{mId}
+	</select>
+	
+	<delete id="mDelete" parameterType="String">
+		DELETE FROM MEMBERT WHERE MID = #{mId}
+	</delete>
+	
+</mapper>

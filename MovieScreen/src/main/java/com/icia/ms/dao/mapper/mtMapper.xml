@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MovieTime">
+	<select id="selectScNo" parameterType="movietime" resultType="int">
+		SELECT SCNO FROM SCREENST WHERE THNAME = #{thName} AND SCNAME = #{scName}
+	</select>
+	<insert id="mtRegister" parameterType="movietime">
+		INSERT INTO MOVIETIMET(MTNO, FMTITLE, MTDATE, MTTIME, MTCOUNT, SCNO) VALUES(MTT_SEQ.NEXTVAL, #{fmTitle}, #{mtDate}, #{mtTime}, 0, #{scNo})
+	</insert>
+	
+	<select id="mtCount" resultType="int">
+		SELECT COUNT(*) FROM MOVIETIMET
+	</select>
+	
+	<select id="mtList" parameterType="paging" resultType="movietime">
+		SELECT * FROM MOVIETIME_INFO WHERE MTRN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="mtSearch" parameterType="search" resultType="movietime">
+		SELECT * FROM MOVIETIMET WHERE ${category} LIKE '%${keyword}%'
+	</select>
+	
+	<select id="mtView" parameterType="int" resultType="movietime">
+		SELECT * FROM MOVIETIMET WHERE MTNO = #{mtNo}
+	</select>
+	
+	<delete id="mtDelete" parameterType="int">
+		DELETE FROM MOVIETIMET WHERE MTNO = #{mtNo}
+	</delete>
+	
+	<update id="updateMtCount" parameterType="movietime">
+		UPDATE MOVIETIMET SET MTCOUNT = #{mtCount} WHERE MTNO = #{mtNo}
+	</update>
+</mapper>

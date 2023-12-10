@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Theater">
+	<insert id="tRegister" parameterType="theater">
+		INSERT INTO THEATERT VALUES(THT_SEQ.NEXTVAL, #{thName}, #{thAddr}, #{thFileName})
+	</insert>
+	
+	<select id="tCount" resultType="int">
+		SELECT COUNT(*) FROM THEATERT
+	</select>
+	
+	<select id="tList" parameterType="paging" resultType="theater">
+		SELECT * FROM THEATERLIST WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="tView" parameterType="String" resultType="theater">
+		SELECT * FROM THEATERT WHERE THNAME = #{thName}
+	</select>
+	
+	<update id="tModify" parameterType="theater">
+		UPDATE THEATERT SET THADDR = #{thAddr}, THFILENAME = #{thFileName} WHERE THNAME = #{thName}
+	</update>
+	
+	<delete id="tDelete" parameterType="int">
+		DELETE FROM THEATERT WHERE THNO = #{thNo}
+	</delete>
+	
+	<select id="tViewNo" parameterType="int" resultType="theater">
+		SELECT * FROM THEATERT WHERE THNO = #{thNo}
+	</select>
+	
+	<select id="setTheaters" resultType="theater">
+		SELECT * FROM THEATERT ORDER BY THNO ASC
+	</select>
+</mapper>

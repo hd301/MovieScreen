@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespaCe는 변경 가능 -->
+<mapper namespace="Crawling">
+	<insert id="cInsert" parameterType="crawling">
+		INSERT INTO CRAWLINGT(CNO, CTITLE, CPERCENT, CFILENAME, CINFOSRC, CTRAILSRC) VALUES(CT_SEQ.NEXTVAL, #{cTitle}, #{cPercent}, #{cFileName}, #{cInfoSrc}, #{cTrailSrc})
+	</insert>
+	
+	<select id="cInfoSrc" parameterType="int" resultType="String">
+		SELECT CINFOSRC FROM CRAWLINGT WHERE CNO = #{cNo}
+	</select>
+	
+	<update id="cDirectorActorNames" parameterType="crawling">
+		UPDATE CRAWLINGT SET CDIRECTORNAME = #{cDirectorName}, CACTORNAME = #{cActorName} WHERE CNO = #{cNo}
+	</update>
+	
+	<update id="cGenre" parameterType="crawling">
+		UPDATE CRAWLINGT SET CGENRE = #{cGenre} WHERE CNO = #{cNo}
+	</update>
+	
+	<update id="cBasicInfo" parameterType="crawling">
+		UPDATE CRAWLINGT SET CGRADE = #{cGrade}, CRUNTIME = #{cRuntime}, CCOUNTRY = #{cCountry}, CRELEASE = #{cRelease}, CCONTENT = #{cContent} WHERE CNO = #{cNo}
+	</update>
+	
+	<select id="setTitles" resultType="crawling">
+		SELECT CTITLE FROM CRAWLINGT ORDER BY CNO ASC
+	</select>
+	
+	<select id="setContents" parameterType="String" resultType="crawling">
+		SELECT * FROM CRAWLINGT WHERE CTITLE = #{fmTitle}
+	</select>
+	
+	<select id="fmList" resultType="crawling">
+		SELECT CTITLE FROM CRAWLINGT ORDER BY CNO ASC
+	</select>
+	
+	<select id="posting" resultType="film">
+		SELECT * FROM FILMT ORDER BY FMNO ASC
+	</select>
+	
+	<select id="banner" resultType="film">
+		SELECT FMVIDEONAME FROM FILMT ORDER BY FMNO ASC
+	</select>
+	
+	<select id="cTrailSrc" parameterType="int" resultType="String">
+		SELECT CTRAILSRC FROM CRAWLINGT WHERE CNO = #{cNo}
+	</select>
+	
+	<update id="cVideoName" parameterType="crawling">
+		UPDATE CRAWLINGT SET CVIDEONAME = #{cVideoName} WHERE CNO = #{cNo}
+	</update>
+	
+</mapper>

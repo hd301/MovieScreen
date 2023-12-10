@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Film">
+	<insert id="fRegister" parameterType="film">
+		INSERT INTO FILMT VALUES(FMT_SEQ.NEXTVAL, #{fmTitle}, #{fmPercent}, #{fmFileName}, #{fmDirectorName}, #{fmActorName}, #{fmGenre}, #{fmGrade}, #{fmRuntime}, #{fmCountry}, #{fmRelease}, #{fmContent}, #{fmVideoName})
+	</insert>
+	
+	<select id="fCount" resultType="int">
+		SELECT COUNT(*) FROM FILMT
+	</select>
+
+	<select id="fList" parameterType="paging" resultType="film">
+		SELECT * FROM FILMLIST WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="fView" parameterType="int" resultType="film">
+		SELECT * FROM FILMT WHERE FMNO = #{fmNo}
+	</select>
+	
+	<update id="fModify" parameterType="film">
+		UPDATE FILMT SET FMTITLE = #{fmTitle}, FMPERCENT = #{fmPercent}, FMFILENAME = #{fmFileName}, FMDIRECTORNAME = #{fmDirectorName}, FMACTORNAME = #{fmActorName}, FMGENRE = #{fmGenre}, FMGRADE = #{fmGrade}, FMRUNTIME = #{fmRuntime}, FMCOUNTRY = #{fmCountry}, FMRELEASE = #{fmRelease}, FMCONTENT = #{fmContent} WHERE FMNO = #{fmNo}
+	</update>
+	
+	<delete id="fDelete" parameterType="int">
+		DELETE FROM FILMT WHERE FMNO = #{fmNo}
+	</delete>
+	
+	<select id="selectFmTitle" parameterType="String" resultType="int">
+		SELECT NVL2((SELECT FMTITLE FROM FILMT WHERE FMTITLE = #{fmTitle}), 1, 0) FROM DUAL
+	</select>
+	
+	<select id="setFmTitles" resultType="film">
+		SELECT FMTITLE FROM FILMT
+	</select>
+	
+</mapper>

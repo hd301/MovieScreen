@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Screens">
+	<select id="setThName" resultType="theater">
+		SELECT * FROM THEATERT
+	</select>
+	
+	<insert id="scRegister" parameterType="screens">
+		INSERT INTO SCREENST VALUES(SCT_SEQ.NEXTVAL, #{scName}, #{scType}, #{scTotal}, #{thName})
+	</insert>
+	
+	<select id="setScName" parameterType="String" resultType="screens">
+		SELECT * FROM SCREENST WHERE THNAME = #{thName}
+	</select>
+	
+	<select id="scCount" resultType="int">
+		SELECT COUNT(*) FROM SCREENST
+	</select>
+	
+	<select id="scList" parameterType="paging" resultType="screens">
+		SELECT * FROM SCREENSLIST WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="scThList" resultType="theater">
+		SELECT * FROM THEATERT
+	</select>
+	
+	<select id="scViewName" parameterType="String" resultType="theater">
+		SELECT * FROM THEATERT WHERE THNAME = #{thName}
+	</select>
+	
+	<select id="scSearch" parameterType="search" resultType="screens">
+		SELECT * FROM SCREENST WHERE ${category} LIKE '%${keyword}%'
+	</select>
+	
+	<select id="scView" parameterType="int" resultType="screens">
+		SELECT * FROM SCREENST WHERE SCNO = #{scNo}
+	</select>
+	
+	<update id="scModify" parameterType="screens">
+		UPDATE SCREENST SET SCNAME = #{scName}, SCTYPE = #{scType}, SCTOTAL = #{scTotal} WHERE SCNO = #{scNo}
+	</update>
+	
+	<delete id="scDelete" parameterType="int">
+		DELETE FROM SCREENST WHERE SCNO = #{scNo}
+	</delete>
+	
+	<select id="setScreens1" parameterType="String" resultType="screens">
+		SELECT * FROM SCREENST WHERE THNAME = #{selectedThName} ORDER BY SCNAME ASC
+	</select>
+	
+	<select id="setScreens2" parameterType="screens" resultType="int">
+		SELECT NVL2((SELECT SCNO FROM SCREENST WHERE THNAME = #{thName} AND SCNAME = #{scName}), 1, 0)
+		FROM DUAL
+	</select>
+	
+</mapper>

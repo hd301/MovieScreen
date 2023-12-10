@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Ticketing">
+	<select id="movieList" resultType="film">
+		SELECT * FROM FILMT
+	</select>
+		
+	<select id="theaterList" parameterType="String" resultType="movieTime">
+		SELECT THNAME FROM MOVIETIME_INFO WHERE FMTITLE = #{fmTitle} GROUP BY THNAME
+	</select>
+	
+	<select id="mtDateList" parameterType="movieTime" resultType="movieTime">
+		SELECT MTDATE FROM MOVIETIME_INFO WHERE FMTITLE = #{fmTitle} AND THNAME = #{thName} GROUP BY MTDATE
+	</select>
+	
+	<select id="mtRemain" parameterType="movieTime" resultType="int">
+		SELECT REMAIN FROM MOVIETIME_INFO WHERE FMTITLE = #{fmTitle} AND THNAME = #{thName} AND MTDATE = #{mtDate}
+		AND SCNAME = #{scName} AND MTTIME = #{mtTime}
+	</select>
+	
+	<select id="mtListFinal" parameterType="movieTime" resultType="movieTime">
+		SELECT * FROM MOVIETIME_INFO WHERE FMTITLE = #{fmTitle} AND THNAME = #{thName} AND MTDATE = #{mtDate}
+	</select>
+	
+	<select id="selectMtNo" parameterType="movietime" resultType="int">
+		SELECT MTNO FROM MOVIETIME_INFO WHERE FMTITLE = #{fmTitle} AND THNAME = #{thName} AND MTDATE = #{mtDate}
+		AND SCNAME = #{scName} AND MTTIME = #{mtTime}
+	</select>
+	
+	<select id="selectMtCount" parameterType="ticketing" resultType="int">
+		SELECT MTCOUNT FROM MOVIETIMET WHERE MTNO = #{mtNo}
+	</select>
+
+	<insert id="tkRegister" parameterType="ticketing">
+		INSERT INTO TICKETINGT(TKNO, MID, TKCOUNT, TKTIME, MTNO) VALUES(TK_SEQ.NEXTVAL, #{mId}, #{tkCount}, #{tkTime}, #{mtNo})
+	</insert>
+	
+	<select id="tkView" parameterType="String" resultType="ticketing">
+		SELECT * FROM TICKETING_INFO_U WHERE MID = #{mId} 
+	</select>
+	
+	<update id="mtCount" parameterType="ticketing">
+		UPDATE MOVIETIMET SET MTCOUNT = MTCOUNT + #{mtCount} WHERE MTNO = #{mtNo}
+	</update>
+	
+	<delete id="tkDelete" parameterType="int">
+		DELETE FROM TICKETINGT WHERE TKNO = #{tkNo} 
+	</delete>
+	
+	<select id="tkCount" resultType="int">
+		SELECT COUNT(*) FROM TICKETINGT
+	</select>
+	
+	<select id="tkList" parameterType="paging" resultType="ticketing">
+		SELECT * FROM TICKETING_INFO WHERE TKRN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="tkSearch" parameterType="search" resultType="ticketing">
+		SELECT * FROM TICKETINGT WHERE ${category} LIKE '%${keyword}%'
+	</select>
+</mapper>

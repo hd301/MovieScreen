@@ -54,7 +54,7 @@
 	</select>
 	
 	<select id="tkList" parameterType="paging" resultType="ticketing">
-		SELECT * FROM TICKETING_INFO WHERE TKRN BETWEEN #{startRow} AND #{endRow}
+		SELECT * FROM TICKETING_INFO_A WHERE TKRN BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
 	<select id="tkSearch" parameterType="search" resultType="ticketing">

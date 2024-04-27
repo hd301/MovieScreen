@@ -48,7 +48,7 @@ public class MemberDAO {
 
 	// MV10 : 회원정보 상세보기
 	public MemberDTO mView(String mId) {
-		System.out.println("[3 mView] service -> dao : mId = " + mId);
+		System.out.println("[3] service -> dao : mId = " + mId);
 		return sql.selectOne("Member.mView", mId);
 	}
 

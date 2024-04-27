@@ -105,7 +105,7 @@ public class MemberService {
 			UUID uuid = UUID.randomUUID();
 			String mFileName = uuid.toString().substring(0, 8) + "-" + mFile.getOriginalFilename();
 			member.setMProfileName(mFileName);
-			String savePath = "C:\\MyWorkspace\\Spring\\MovieScreen\\src\\main\\webapp\\resources\\profile\\";
+			String savePath = "C:\\Users\\hdTwon\\git\\MovieScreen\\MovieScreen\\src\\main\\webapp\\resources\\profile\\";
 			
 			try {
 				mFile.transferTo(new File(savePath+mFileName));
@@ -231,7 +231,7 @@ public class MemberService {
 			UUID uuid = UUID.randomUUID();
 			String mFileName = uuid.toString().substring(0, 8) + "-" + mFile.getOriginalFilename();
 			member.setMProfileName(mFileName);
-			String savePath = "C:\\MyWorkspace\\Spring\\MovieScreen\\src\\main\\webapp\\resources\\profile\\";
+			String savePath = "C:\\Users\\hdTwon\\git\\MovieScreen\\MovieScreen\\src\\main\\webapp\\resources\\profile\\";
 			
 			try {
 				mFile.transferTo(new File(savePath+mFileName));
@@ -264,7 +264,7 @@ public class MemberService {
 	// 업로드 파일 삭제 메소드
 	public boolean fileDelete(String fileName) {
 		boolean result = false;
-		String savePath = "C:\\MyWorkspace\\Spring\\MovieScreen\\src\\main\\webapp\\resources\\profile\\";
+		String savePath = "C:\\Users\\hdTwon\\git\\MovieScreen\\MovieScreen\\src\\main\\webapp\\resources\\profile\\";
 		File deleteFile = new File(savePath + fileName);
 		
 		if (deleteFile.exists()) {
